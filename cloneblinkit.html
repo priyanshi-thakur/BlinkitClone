@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blinkit - Groceries in Minutes</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: white;
+            color: #222;
+        }
+
+        /* top navigation */
+        nav {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 6%;
+            border-bottom: 1px solid #ddd;
+            background-color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #168b32;
+            letter-spacing: -2px;
+        }
+
+        .logo span {
+            color: #f7c928;
+        }
+
+        .delivery {
+            margin-left: 15px;
+            min-width: 210px;
+        }
+
+        .delivery h3 {
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .delivery p {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .search {
+            width: 45%;
+        }
+
+        .search input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e5e5e5;
+            background-color: #f7f7f7;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .nav-items li {
+            list-style: none;
+            cursor: pointer;
+        }
+
+        .cart-btn {
+            background-color: #10852a;
+            color: white;
+            padding: 16px 22px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        main {
+            margin: 25px auto;
+            width: 86%;
+        }
+
+        /* main green banner */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #168b43;
+            color: white;
+            border-radius: 10px;
+            padding: 28px 4%;
+            min-height: 270px;
+            margin-bottom: 25px;
+        }
+
+        .hero-content {
+            width: 45%;
+        }
+
+        .small-heading {
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            line-height: 1.25;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            line-height: 1.5;
+            margin-bottom: 22px;
+        }
+
+        button {
+            border: none;
+            border-radius: 7px;
+            padding: 15px 22px;
+            background-color: white;
+            color: #08752b;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .hero-picture {
+            width: 40%;
+            height: 190px;
+            border-radius: 8px;
+            background: #c8f4ad;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 85px;
+        }
+
+        /* three small offer boxes */
+        .offers {
+            display: flex;
+            gap: 12px;
+            margin: 22px 0 35px;
+        }
+
+        .offer {
+            width: 33.33%;
+            min-height: 145px;
+            padding: 14px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .offer h2 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .offer p {
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .offer button {
+            padding: 10px 14px;
+            color: #222;
+            font-size: 11px;
+        }
+
+        .offer-icon {
+            font-size: 65px;
+        }
+
+        .pharmacy {
+            background-color: #c6f3ed;
+            border-left: 12px solid #0ab4a7;
+        }
+
+        .pet {
+            background-color: #ffcc36;
+        }
+
+        .baby {
+            background-color: #e7edf1;
+        }
+
+        /* categories section */
+        .category-section {
+            margin-bottom: 35px;
+        }
+
+        .green-text {
+            color: #07852b;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 7px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .section-heading h2 {
+            font-size: 27px;
+        }
+
+        .section-heading a {
+            color: green;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .category-items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px 14px;
+        }
+
+        .category-item {
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .category-img {
+            height: 105px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .category-item p {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .c1 { background: #e0f3d7; }
+        .c2 { background: #e1f2ff; }
+        .c3 { background: #fff0d5; }
+        .c4 { background: #e0f6f4; }
+        .c5 { background: #fde7e7; }
+        .c6 { background: #f4eade; }
+        .c7 { background: #fbefcf; }
+        .c8 { background: #f8e2ed; }
+        .c9 { background: #eaf0d9; }
+        .c10 { background: #f5e8d8; }
+        .c11 { background: #ffe9e1; }
+        .c12 { background: #f8e1db; }
+        .c13 { background: #e3f1f8; }
+        .c14 { background: #e2f1dc; }
+        .c15 { background: #eee6ff; }
+        .c16 { background: #fff0ca; }
+
+        .bottom-note {
+            background-color: #f1f5ee;
+            padding: 18px 22px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin: 45px 0;
+        }
+
+        .bottom-note .bolt {
+            font-size: 30px;
+        }
+
+        .bottom-note p {
+            color: gray;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+
+        /* a few products added below the category list */
+        .quick-picks {
+            margin: 35px 0;
+        }
+
+        .quick-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .quick-title h2 {
+            font-size: 25px;
+        }
+
+        .quick-title a {
+            color: green;
+            text-decoration: none;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .product {
+            border: 1px solid #e3e3e3;
+            border-radius: 8px;
+            padding: 12px;
+            background-color: white;
+        }
+
+        .product-picture {
+            height: 115px;
+            background-color: #f4f7ef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 55px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .product-detail {
+            color: gray;
+            font-size: 13px;
+        }
+
+        .product-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+        }
+
+        .product-bottom button {
+            background-color: #e9f6e9;
+            border: 1px solid green;
+            color: green;
+            padding: 7px 15px;
+        }
+
+        /* footer */
+        footer {
+            border-top: 1px solid #ddd;
+            padding: 30px 7%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 25px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        footer h3 {
+            color: #222;
+            margin-bottom: 18px;
+        }
+
+        footer p {
+            margin: 12px 0;
+            cursor: pointer;
+        }
+
+        .footer-logo {
+            color: #07852b;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        /* small screen adjustment */
+        @media screen and (max-width: 800px) {
+            nav {
+                padding: 12px 4%;
+                height: auto;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .delivery {
+                min-width: 150px;
+            }
+
+            .search {
+                width: 100%;
+                order: 5;
+            }
+
+            main {
+                width: 92%;
+            }
+
+            .hero {
+                padding: 25px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero-picture {
+                font-size: 70px;
+                height: 180px;
+            }
+
+            .category-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .offers {
+                flex-wrap: wrap;
+            }
+
+            .offer {
+                width: 100%;
+            }
+
+            footer {
+                flex-wrap: wrap;
+                gap: 30px;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .delivery {
+                display: none;
+            }
+
+            .nav-items {
+                gap: 10px;
+            }
+
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .hero-content, .hero-picture {
+                width: 100%;
+            }
+
+            .category-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-img {
+                height: 110px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="logo"><span>blink</span>it</div>
+
+        <div class="delivery">
+            <h3>Delivery in around 20 minutes</h3>
+            <p>Drop your location &nbsp;⌄</p>
+        </div>
+
+        <div class="search">
+            <input type="text" placeholder='⌕  Search "milk"'>
+        </div>
+
+        <div class="nav-items">
+            <li>Login</li>
+            <li class="cart-btn">🛒 My Cart</li>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="small-heading">YOUR DAILY NEEDS, MADE EASY</div>
+                <h1>Stock up on<br>daily essentials</h1>
+                <p>Your daily groceries, snacks and home needs<br>
+                    are just a few clicks away.</p>
+                <button>Shop Now &nbsp; ⟶</button>
+            </div>
+
+            <div class="hero-picture">
+                🥑 🥕 🥬
+            </div>
+        </section>
+
+        <section class="offers">
+            <div class="offer pharmacy">
+                <div>
+                    <small>HEALTH & WELLNESS</small>
+                    <h2>Pharmacy at<br>your doorstep!</h2>
+                    <p>Quick supplies, pain relief & everyday essentials.</p>
+                    <button>Order Now &nbsp; ⟶</button>
+                </div>
+                <div class="offer-icon">💊</div>
+            </div>
+
+            <div class="offer pet">
+                <div>
+                    <small>FOR YOUR BEST FRIEND</small>
+                    <h2>Pet care supplies<br>at your door</h2>
+                    <p>Food, treats, toys & more.</p>
+                    <button>Order Now &nbsp; ⟶</button>
+                </div>
+                <div class="offer-icon">🐶</div>
+            </div>
+
+            <div class="offer baby">
+                <div>
+                    <small>LITTLE JOYS</small>
+                    <h2>No time for<br>a diaper run?</h2>
+                    <p>Get baby care essentials delivered.</p>
+                    <button>Order Now &nbsp; ⟶</button>
+                </div>
+                <div class="offer-icon">🍼</div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <p class="green-text">YOUR EVERYDAY STORE</p>
+            <div class="section-heading">
+                <h2>Explore our store</h2>
+                <a href="#">View all &nbsp; ⟶</a>
+            </div>
+
+            <div class="category-items">
+                <div class="category-item">
+                    <div class="category-img c1">🥑</div>
+                    <p>Fruits & Vegetables</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c2">🥛</div>
+                    <p>Dairy, Bread & Eggs</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c3">🍪</div>
+                    <p>Munchies</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c4">🥤</div>
+                    <p>Cold Drinks & Juices</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c5">🍜</div>
+                    <p>Instant & Frozen Food</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c6">☕</div>
+                    <p>Tea, Coffee & Health Drink</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c7">🍞</div>
+                    <p>Bakery & Biscuits</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c8">🍫</div>
+                    <p>Sweet Tooth</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c9">🌾</div>
+                    <p>Atta, Rice & Dal</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c10">🫙</div>
+                    <p>Masala, Oil & More</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c11">🥫</div>
+                    <p>Sauces & Spreads</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c12">🍗</div>
+                    <p>Chicken, Meat & Fish</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c13">🧽</div>
+                    <p>Cleaning Essentials</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c14">🪴</div>
+                    <p>Home & Office</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c15">🧴</div>
+                    <p>Personal Care</p>
+                </div>
+                <div class="category-item">
+                    <div class="category-img c16">🐾</div>
+                    <p>Pet Care</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="quick-picks">
+            <div class="quick-title">
+                <div>
+                    <p class="green-text">POPULAR RIGHT NOW</p>
+                    <h2>Today's quick picks</h2>
+                </div>
+                <a href="#">See more</a>
+            </div>
+
+            <div class="products">
+                <div class="product">
+                    <div class="product-picture">🍎</div>
+                    <p class="product-name">Kashmiri Apples</p>
+                    <p class="product-detail">4 pcs</p>
+                    <div class="product-bottom">
+                        <b>₹120</b>
+                        <button>ADD</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="product-picture">🥛</div>
+                    <p class="product-name">Fresh Milk</p>
+                    <p class="product-detail">500 ml</p>
+                    <div class="product-bottom">
+                        <b>₹32</b>
+                        <button>ADD</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="product-picture">🍞</div>
+                    <p class="product-name">Brown Bread</p>
+                    <p class="product-detail">1 pack</p>
+                    <div class="product-bottom">
+                        <b>₹45</b>
+                        <button>ADD</button>
+                    </div>
+                </div>
+                <div class="product">
+                    <div class="product-picture">🍌</div>
+                    <p class="product-name">Bananas</p>
+                    <p class="product-detail">6 pcs</p>
+                    <div class="product-bottom">
+                        <b>₹40</b>
+                        <button>ADD</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="bottom-note">
+            <div class="bolt">⚡</div>
+            <div>
+                <b>More time for what matters.</b>
+                <p>Everyday essentials, delivered at your doorstep in minutes.</p>
+            </div>
+            <div class="footer-logo" style="margin-left:auto;">blinkit :)</div>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <div class="footer-logo">blinkit</div>
+            <p>Groceries and more, at your door.</p>
+            <p>◉ &nbsp; f &nbsp; 𝕏 &nbsp; in</p>
+        </div>
+
+        <div>
+            <h3>Useful Links</h3>
+            <p>About</p>
+            <p>Careers</p>
+            <p>Press</p>
+            <p>Blog</p>
+            <p>Privacy</p>
+        </div>
+
+        <div>
+            <h3>Categories</h3>
+            <p>Vegetables & Fruits</p>
+            <p>Dairy & Breakfast</p>
+            <p>Munchies</p>
+            <p>Cold Drinks</p>
+            <p>Instant Food</p>
+        </div>
+
+        <div>
+            <h3>Help & Support</h3>
+            <p>FAQs</p>
+            <p>Partner with us</p>
+            <p>Terms & Conditions</p>
+            <p>Contact us</p>
+        </div>
+
+        <div>
+            <h3>Download App</h3>
+            <p>▶ &nbsp; App Store</p>
+            <p>▶ &nbsp; Google Play</p>
+        </div>
+    </footer>
+</body>
+</html>
